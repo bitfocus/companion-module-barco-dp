@@ -106,7 +106,7 @@ instance.prototype.actions = function (system) {
 					options: [{
 						type: 'dropdown',
 						label: 'open/close',
-						id: 'Shutter',
+						id: 'shutter',
 						default: 'shutter_close',
 						choices: [{ label: 'shutter close', id: 'shutter_close' }, { label: 'shutter open', id: 'shutter_open' }]
 					}]
@@ -180,17 +180,17 @@ instance.prototype.action = function (action) {
 		switch (id) {
 				case 'lamp':
 					if (opt.lamp === 'lamp_on') {
-						cmd = getCommandValue(Buffer.from([0x76,0x1a]), 0x01).toString('hex')
+						cmd = getCommandValue(Buffer.from([0x76,0x1a]), '1').toString('hex');
 					} else if (opt.lamp === 'lamp_off') {
-						cmd = getCommandValue(Buffer.from([0x76,0x1a]), 0x00).toString('hex')
+						cmd = getCommandValue(Buffer.from([0x76,0x1a]), '0').toString('hex');
 					}
 					break;
 
 				case 'shutter':
 					if (opt.lamp === 'shutter_open') {
-							cmd = getCommandValue(Buffer.from([0x22,0x42]), 0x00).toString('hex')
+						cmd = getCommandValue(Buffer.from([0x22,0x42]), '0');
 					} else if (opt.lamp === 'shutter_close') {
-							cmd = getCommandValue(Buffer.from([0x23,0x42]), 0x00).toString('hex')
+						cmd = getCommandValue(Buffer.from([0x23,0x42]), '0').toString('hex');
 					}
 					break;
 
