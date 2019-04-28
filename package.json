@@ -1,6 +1,6 @@
 {
 	"name": "barco-dp",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"api_version": "1.0.0",
 	"keywords": [
 		"Protocol",
@@ -8,7 +8,7 @@
 		],
 	"manufacturer": "Barco",
 	"product": "DP Projector",
-	"shortname": "DP",
+	"shortname": "DP **NOT TESTED**",
 	"description": "DP plugin for Companion",
 	"main": "index.js",
 	"scripts": {
