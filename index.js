@@ -21,7 +21,7 @@ instance.prototype.init = function () {
 		self.status(self.STATUS_UNKNOWN);
 
 		if (self.config.host !== undefined) {
-				self.tcp = new tcp(self.config.host, self.config.port);
+				self.tcp = new tcp(self.config.host, '43728');
 
 				self.tcp.on('status_change', function (status, message) {
 						self.status(status, message);
@@ -43,7 +43,7 @@ instance.prototype.updateConfig = function (config) {
 		}
 
 		if (self.config.host !== undefined) {
-				self.tcp = new tcp(self.config.host, self.config.port);
+				self.tcp = new tcp(self.config.host, '43728');
 
 				self.tcp.on('status_change', function (status, message) {
 						self.status(status, message);
@@ -80,7 +80,7 @@ instance.prototype.config_fields = function () {
 						label: 'Portnumber',
 						width: 6,
 						default: '43728',
-						choices: [{ label: 'Series 2, 43728', id: '43728'},{ label: 'Series 1, 43680', id: '43680'}]
+						choices: [{ label: 'Series 2, 43728', id: '43728'}]
 				}
 		];
 };
@@ -121,16 +121,6 @@ instance.prototype.actions = function (system) {
 			},
 			'shutter2': {
 					label: 'Shutter option 2',
-					options: [{
-							type: 'dropdown',
-							label: 'open/close',
-							id: 'shutter',
-							default: 'shutter_close',
-							choices: [{ label: 'shutter close', id: 'shutter_close' }, { label: 'shutter open', id: 'shutter_open' }]
-					}]
-			},
-			'shutter3': {
-					label: 'Shutter option 3',
 					options: [{
 							type: 'dropdown',
 							label: 'open/close',
@@ -218,7 +208,15 @@ instance.prototype.action = function (action) {
 					if (opt.shutter === 'shutter_open') {
 							cmd = Buffer.from([0xfe,0x00,0x22,0x42,0x00,0x64,0xff]);
 					} else if (opt.shutter === 'shutter_close') {
-							cmd = Buffer.from([0xfe,0x00,0x23,0x42,0x00,0x64,0xff]);
+							cmd = Buffer.from([0xfe,0x00,0x23,0x42,0x00,0x65,0xff]);
+					}
+					break;
+
+				case 'shutter2':
+					if (opt.shutter === 'shutter_open') {
+							cmd = getCommandValue(Buffer.from([0x22,0x42]), '0');
+					} else if (opt.shutter === 'shutter_close') {
+							cmd = getCommandValue(Buffer.from([0x23,0x42]), '0');
 					}
 					break;
 
