@@ -208,47 +208,31 @@ instance.prototype.action = function (action) {
 		switch (id) {
 				case 'lamp':
 					if (opt.lamp === 'lamp_on') {
-						cmd = getCommandValue(Buffer.from([0x76,0x1a]), '1').toString('hex');
+						cmd = getCommandValue(Buffer.from([0x76,0x1a]), '1');
 					} else if (opt.lamp === 'lamp_off') {
-						cmd = getCommandValue(Buffer.from([0x76,0x1a]), '0').toString('hex');
+						cmd = getCommandValue(Buffer.from([0x76,0x1a]), '0');
 					}
 					break;
 
 				case 'shutter':
 					if (opt.shutter === 'shutter_open') {
-							cmd = Buffer.from([0xfe0,0x00,0x22,0x42,0x00,0x64,0xff]);
+							cmd = Buffer.from([0xfe,0x00,0x22,0x42,0x00,0x64,0xff]);
 					} else if (opt.shutter === 'shutter_close') {
-							cmd = Buffer.from([0xfe0,0x00,0x23,0x42,0x00,0x64,0xff]);
-					}
-					break;
-
-				case 'shutter2':
-					if (opt.shutter === 'shutter_open') {
-							cmd = Buffer.from([0xfe,0x00,0x22,0x42,0x00,0x64,0xff]).toString('hex');
-					} else if (opt.shutter === 'shutter_close') {
-							cmd = Buffer.from([0xfe,0x00,0x23,0x42,0x00,0x64,0xff]).toString('hex');
-					}
-					break;
-
-				case 'shutter3':
-					if (opt.shutter === 'shutter_open') {
-							cmd = '\xfe\x00\x22\x42\x00\x64\xff';
-					} else if (opt.shutter === 'shutter_close') {
-							cmd = '\xfe\x00\x23\x42\x00\x64\xff';
+							cmd = Buffer.from([0xfe,0x00,0x23,0x42,0x00,0x64,0xff]);
 					}
 					break;
 
 				case 'lensShift':
-					cmd = getCommandValue(Buffer.from([0xf4, 0x81]), opt.side).toString('hex');
+					cmd = getCommandValue(Buffer.from([0xf4, 0x81]), opt.side);
 					break;
 
 				case 'lensZoom':
-					cmd = getCommandValue(Buffer.from([0xf4, 0x82]), opt.zoom).toString('hex');
+					cmd = getCommandValue(Buffer.from([0xf4, 0x82]), opt.zoom);
 					break;
 
 
 				case 'lensFocus':
-					cmd = getCommandValue(Buffer.from([0xf4, 0x83]), opt.focus).toString('hex');
+					cmd = getCommandValue(Buffer.from([0xf4, 0x83]), opt.focus);
 					break;
 
 		}
