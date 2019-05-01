@@ -148,6 +148,14 @@ instance.prototype.actions = function (system) {
 					choices: [{ label: 'Near', id: '0'},{ label: 'Far', id: '1'}],
 					default: '0'
 				}]
+			},
+			'macro': {
+				label: 'Execute macro',
+				options: [{
+					label: 'Marco name',
+					type: 'textinput',
+					id: 'macro'
+				}]
 			}
 	};
 
@@ -162,25 +170,42 @@ instance.prototype.action = function (action) {
 
 		getCommandValue = function(command, parameter) {
 				let checksum = 0;
-				let pBuffer  = Buffer.from([parseInt(parameter)]);
+
 				// Calculate the checksum value.
 				command.forEach(function(item) {
 						checksum += item;
 				});
 
-				pBuffer.forEach(function(item) {
-						checksum += item;
-				});
+				if(parameter !== null) {
 
-				checksum = checksum % 256;
+					let pBuffer  = Buffer.from([parseInt(parameter)]);
 
-				// Build the value to be sent. 0x00,0x03,0x02 is an answer request it's optional
-				return Buffer.concat([
-					Buffer.from([0xFE,0x00]),
-					command,
-					pBuffer,
-					Buffer.from([checksum]),
-					Buffer.from([0xFF])]);
+					// Calculate the checksum value.
+					pBuffer.forEach(function(item) {
+							checksum += item;
+					});
+
+					checksum = checksum % 256;
+
+					// Build the value to be sent. 0x00,0x03,0x02 is an answer request it's optional
+					return Buffer.concat([
+						Buffer.from([0xFE,0x00]),
+						command,
+						pBuffer,
+						Buffer.from([checksum]),
+						Buffer.from([0xFF])]);
+
+				} else {
+					checksum = checksum % 256;
+
+					// Build the value to be sent. 0x00,0x03,0x02 is an answer request it's optional
+					return Buffer.concat([
+						Buffer.from([0xFE,0x00]),
+						command,
+						Buffer.from([checksum]),
+						Buffer.from([0xFF])]);
+				}
+
 		};
 
 		switch (id) {
@@ -213,9 +238,13 @@ instance.prototype.action = function (action) {
 					cmd = getCommandValue(Buffer.from([0xf4, 0x83]), opt.focus);
 					break;
 
+				case 'macro':
+					cmd = getCommandValue(Buffer.concat([Buffer.from([0xe8,0x81]),Buffer.from(opt.macro)]), null);
+					break;
 		}
 
 		if (cmd !== undefined) {
+			console.log('command: '+cmd);
 				if (self.tcp !== undefined) {
 						debug('sending ', cmd, "to", self.tcp.host);
 						self.tcp.send(cmd);
