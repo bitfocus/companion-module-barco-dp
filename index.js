@@ -119,24 +119,14 @@ instance.prototype.actions = function (system) {
 							choices: [{ label: 'shutter close', id: 'shutter_close' }, { label: 'shutter open', id: 'shutter_open' }]
 					}]
 			},
-			'shutter2': {
-					label: 'Shutter option 2',
-					options: [{
-							type: 'dropdown',
-							label: 'open/close',
-							id: 'shutter',
-							default: 'shutter_close',
-							choices: [{ label: 'shutter close', id: 'shutter_close' }, { label: 'shutter open', id: 'shutter_open' }]
-					}]
-			},
 			'lensShift': {
 					label: 'Shift the lens',
 					options: [{
 						type: 'dropdown',
 						id: 'side',
-						label: 'Shift',
-						choices: [{ label: 'Up', id: '0x00'}, { label: 'Down', id: '0x01'}, { label: 'Left', id: '0x02'}, { label: 'Right', id: '0x03'}],
-						default: '0x00'
+						label: 'shift',
+						choices: [{ label: 'Up', id: '0'}, { label: 'Down', id: '1'}, { label: 'Left', id: '2'}, { label: 'Right', id: '3'}],
+						default: '0'
 					}]
 			},
 			'lensZoom': {
@@ -145,8 +135,8 @@ instance.prototype.actions = function (system) {
 					type: 'dropdown',
 					id: 'zoom',
 					label: 'zoom',
-					choices: [{ label: 'Zoom in', id: '0x00'},{ label: 'Zoom out', id: '0x01'}],
-					default: '0x00'
+					choices: [{ label: 'Zoom in', id: '0'},{ label: 'Zoom out', id: '1'}],
+					default: '0'
 				}]
 			},
 			'lensFocus': {
@@ -155,8 +145,8 @@ instance.prototype.actions = function (system) {
 					type: 'dropdown',
 					id: 'focus',
 					label: 'focus',
-					choices: [{ label: 'Near', id: '0x00'},{ label: 'Far', id: '0x01'}],
-					default: '0x00'
+					choices: [{ label: 'Near', id: '0'},{ label: 'Far', id: '1'}],
+					default: '0'
 				}]
 			}
 	};
@@ -171,9 +161,8 @@ instance.prototype.action = function (action) {
 		var cmd;
 
 		getCommandValue = function(command, parameter) {
-				let checksum = 5;
-				let pBuffer  = Buffer.from(parameter);
-
+				let checksum = 0;
+				let pBuffer  = Buffer.from([parseInt(parameter)]);
 				// Calculate the checksum value.
 				command.forEach(function(item) {
 						checksum += item;
@@ -187,10 +176,9 @@ instance.prototype.action = function (action) {
 
 				// Build the value to be sent. 0x00,0x03,0x02 is an answer request it's optional
 				return Buffer.concat([
-					Buffer.from([0xFE, 0x0, 0x0, 0x03, 0x02]),
+					Buffer.from([0xFE,0x00]),
 					command,
 					pBuffer,
-					Buffer.from([0x0]),
 					Buffer.from([checksum]),
 					Buffer.from([0xFF])]);
 		};
@@ -198,9 +186,9 @@ instance.prototype.action = function (action) {
 		switch (id) {
 				case 'lamp':
 					if (opt.lamp === 'lamp_on') {
-						cmd = getCommandValue(Buffer.from([0x76,0x1a]), '1');
+						cmd = getCommandValue(Buffer.from([0x00,0x03,0x02,0x76,0x1a]), '1');
 					} else if (opt.lamp === 'lamp_off') {
-						cmd = getCommandValue(Buffer.from([0x76,0x1a]), '0');
+						cmd = getCommandValue(Buffer.from([0x00,0x03,0x02,0x76,0x1a]), '0');
 					}
 					break;
 
@@ -209,14 +197,6 @@ instance.prototype.action = function (action) {
 							cmd = Buffer.from([0xfe,0x00,0x22,0x42,0x00,0x64,0xff]);
 					} else if (opt.shutter === 'shutter_close') {
 							cmd = Buffer.from([0xfe,0x00,0x23,0x42,0x00,0x65,0xff]);
-					}
-					break;
-
-				case 'shutter2':
-					if (opt.shutter === 'shutter_open') {
-							cmd = getCommandValue(Buffer.from([0x22,0x42]), '0');
-					} else if (opt.shutter === 'shutter_close') {
-							cmd = getCommandValue(Buffer.from([0x23,0x42]), '0');
 					}
 					break;
 
