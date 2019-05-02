@@ -196,12 +196,14 @@ instance.prototype.action = function (action) {
 						Buffer.from([0xFF])]);
 
 				} else {
+					//Allready calculated from the commands
 					checksum = checksum % 256;
 
-					// Build the value to be sent. 0x00,0x03,0x02 is an answer request it's optional
+					// Build the value to be sent. 0x00,0x03,0x02 is an answer request it's optional, the extra 0x00 before checksum is for the macro option!
 					return Buffer.concat([
 						Buffer.from([0xFE,0x00]),
 						command,
+						Buffer.from([0x00]),
 						Buffer.from([checksum]),
 						Buffer.from([0xFF])]);
 				}
