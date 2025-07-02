@@ -40,6 +40,7 @@ class BarcoDPInstance extends InstanceBase {
         label: 'Port',
         default: '43728',
         width: 6,
+        tooltip: 'Port 43728 for Series 2, Port 43731 for Series 4',
       },
     ]
   }
