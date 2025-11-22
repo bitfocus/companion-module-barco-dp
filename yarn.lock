@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 4
+  version: 6
   cacheKey: 7
 
 "@companion-module/base@npm:~1.12.1":
@@ -588,7 +588,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:4.25.1, browserslist@npm:^4.24.0":
+"browserslist@npm:^4.24.0":
   version: 4.25.1
   resolution: "browserslist@npm:4.25.1"
   dependencies:
@@ -1502,16 +1502,16 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@^1.20.0#builtin<compat/resolve>":
+"resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>":
   version: 1.22.10
-  resolution: "resolve@patch:resolve@npm%3A1.22.10#builtin<compat/resolve>::version=1.22.10&hash=3388aa"
+  resolution: "resolve@patch:resolve@npm%3A1.22.10#~builtin<compat/resolve>::version=1.22.10&hash=c3c19d"
   dependencies:
     is-core-module: ^2.16.0
     path-parse: ^1.0.7
     supports-preserve-symlinks-flag: ^1.0.0
   bin:
     resolve: bin/resolve
-  checksum: 31a77e501b438ffef644c2af82cf265e6a37d208d77d9d93ba8b78f1788fb9329f24a5c9d3c3460b4dda9c11a9845e3284d194a879bff0bb57c75aaf8fb0f91f
+  checksum: 8/8aac1e4e4628bd00bf4b94b23de137dd3fe44097a8d528fd66db74484be929936e20c696e1a3edf4488f37e14180b73df6f600992baea3e089e8674291f16c9d
   languageName: node
   linkType: hard
 
@@ -1884,10 +1884,10 @@ resolve@^1.20.0:
   linkType: hard
 
 "zx@npm:^8.3.2":
-  version: 8.6.1
-  resolution: "zx@npm:8.6.1"
+  version: 8.8.5
+  resolution: "zx@npm:8.8.5"
   bin:
     zx: build/cli.js
-  checksum: 4a7408ca9d1812cc4ce2c899bf6087c4d2488d0ee8031c1ef24c441da5f97f7ffb13f6df22a78ecb8751d49a317d5abb691cbfa0b1965ccfbd4727323899a2d0
+  checksum: 8/bf3bb23ae0d0a1198ea53a7ac7e341900b33251aeb4ed657dcbfcc76ed7b0411bd47cc6bdaf67f7b2b79f83339e25d1e47bbf359a8ededfdc33792fb22a92c4c
   languageName: node
   linkType: hard
