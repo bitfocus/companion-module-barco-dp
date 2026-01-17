@@ -1234,21 +1234,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minizlib@npm:^3.0.1":
-  version: 3.0.2
-  resolution: "minizlib@npm:3.0.2"
+"minizlib@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "minizlib@npm:3.1.0"
   dependencies:
     minipass: ^7.1.2
-  checksum: 8b050d9530361f54d461d5d40d1bb663257453a0f882c7bf6243bfb1edc25a3ee2a7e0af815831bcee75f0ea4ea0c7aa55bce7fdfc167738ffa2ff2ea04e875b
-  languageName: node
-  linkType: hard
-
-"mkdirp@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "mkdirp@npm:3.0.1"
-  bin:
-    mkdirp: dist/cjs/src/bin.js
-  checksum: fe3328ee272cd8e17d4f651ddeb51acc6f8d72a74d8e2019f5f8324a4a2019269daf31091c8a70cc80494d6780d088eb404a79b2cf80f246f82020f03b5be38c
+  checksum: 8/a15e6f0128f514b7d41a1c68ce531155447f4669e32d279bba1c1c071ef6c2abd7e4d4579bb59ccc2ed1531346749665968fdd7be8d83eb6b6ae2fe1f3d370a7
   languageName: node
   linkType: hard
 
@@ -1643,16 +1634,15 @@ resolve@^1.20.0:
   linkType: hard
 
 "tar@npm:^7.4.3":
-  version: 7.4.3
-  resolution: "tar@npm:7.4.3"
+  version: 7.5.3
+  resolution: "tar@npm:7.5.3"
   dependencies:
     "@isaacs/fs-minipass": ^4.0.0
     chownr: ^3.0.0
     minipass: ^7.1.2
-    minizlib: ^3.0.1
-    mkdirp: ^3.0.1
+    minizlib: ^3.1.0
     yallist: ^5.0.0
-  checksum: 2e67db56b0abbb91838996b519d3dd39d9b4476b20b3cda7a8685382aaceaf93c59096db1c2fc867dff9e4e916a3e988d3004775eeab66945d436e8c06e377e7
+  checksum: 8/146cd30727cd886c6cbed9e8f67c280f98bcab57c69d7acdb44d8a743987aac9b27cb10a98c2ea3cd416ded44ee93cad84c4acd6abad900f6aaa4845ceaf1b46
   languageName: node
   linkType: hard
 
