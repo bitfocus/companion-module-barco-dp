@@ -11,7 +11,7 @@
     "@companion-module/base": "~1.12.1"
   },
   "devDependencies": {
-    "@companion-module/tools": "^2.3.0"
+    "@companion-module/tools": "^2.6.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
